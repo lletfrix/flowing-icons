@@ -4,7 +4,7 @@ import os
 import json
 
 SVG_DICT = 'compiled-icons/'
-FIRST_GLYPH = 69420
+FIRST_GLYPH = 57344
 
 def main():
     config = {}
@@ -16,12 +16,15 @@ def main():
         name = svg[1].split('.')[0]
         glyph = font.createChar(FIRST_GLYPH+i, name)
         glyph.importOutlines(path)
-        glyph.transform([1.00,0.00,0.00,1.00,-500,0])
+        # glyph.transform([1.00,0.00,0.00,1.00,-500,0])
+        glyph.width=1000
+        # glyph.vwidth=1000
         config[name] = FIRST_GLYPH+i
 
     font.familyname = 'Flowing-Icons'
     font.fullname = 'Flowing-Icons'
     font.fontname = 'Flowing-Icons'
+    font.correctDirection()
     font.generate('Flowing-Icons.ttf')
     
     with open('Flowing-Icons.json', 'w') as f:
